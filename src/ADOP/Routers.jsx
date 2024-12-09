@@ -1,8 +1,8 @@
 import React from 'react';
-import { Route, Routes, Navigate } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
+import Animal from '../indiAnimal/animal';
 import ShowPage from './Display/ShowPage';
 import Home from './HomePage/Home';
-import Animal from '../indiAnimal/animal';
 
 export default function Routers() {
     return (

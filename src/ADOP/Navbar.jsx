@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 import './Navbar.css';
 
 
@@ -267,6 +268,14 @@ fetch(url, {
     }
   };
 
+  const scrollToFooter = () => {
+    const footer = document.getElementById('footer');
+    if (footer) {
+      footer.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+
   return (
     <div>
       <nav>
@@ -275,9 +284,11 @@ fetch(url, {
         </div>
 
         <div className="nav-links">
-          <a href="https://example.com/home">Home</a>
-          <a href="https://example.com/about">About</a>
-          <a href="https://example.com/services">Services</a>
+          <NavLink to={'/'}> Home </NavLink>
+          <NavLink to={'/About'}>About</NavLink>
+          <NavLink to="/" onClick={scrollToFooter}>
+        Services
+      </NavLink>
         </div>
 
         <div className="search-container">

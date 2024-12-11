@@ -30,7 +30,7 @@ export default function ShowPage() {
                                     <h3 className="brid">{animal.breed}</h3>
                                     <p className="age">Age: {animal.age}</p>
                                     <p className="place">Place: {animal.place}</p>
-                                    <p className="price">Price: {animal.price}</p>
+                                    <p className="price">Price: ₹{animal.price}</p>
                                 </div>
                             </div>
                         </NavLink>

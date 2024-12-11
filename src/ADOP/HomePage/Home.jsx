@@ -8,6 +8,7 @@ import './Home.css';
 export default function Home() {
 const [menuOpen, setMenuOpen] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
+  
 
   const sliderData = [
     {
@@ -64,7 +65,7 @@ const changeSlide = (index) => {
         const Data = AllData();
 
         // Define the categories you want to display
-        const categories = ["Dog", "Cat", "Rabbit", "Bird", "Tiger", "Lion"];
+        const categories = ["Dog", "Cat", "Rabbit", "Bird", "Fish"];
         
         // Get the first animal from each category
         const uniqueAnimals = categories.map(category =>
@@ -94,14 +95,7 @@ const changeSlide = (index) => {
                             <div className="description">
                                 <h2>{sliderData[currentSlide].title}</h2>
                                 <p>{sliderData[currentSlide].description}</p>
-                                <div className="buttons">
-                                <button
-                                    className="adopt-btn"
-                                    onClick={() => navigate('/adoptly/dog/2')}
-                                >
-                                    {sliderData[currentSlide].adoptText}
-                                </button>
-                            </div>
+                            
                         </div>
                         </div>
                     </div>

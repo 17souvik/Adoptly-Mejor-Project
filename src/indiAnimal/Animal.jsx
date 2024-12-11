@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import AllData from "../ADOP/Data/Data";
 import Footer from "../ADOP/Footer";
 import Navbar from "../ADOP/Navbar";
 import './Animal.css';
-
 export default function Animal() {
   const { category, id } = useParams();
   const [animalDetails, setAnimalDetails] = useState(null);
@@ -35,9 +34,11 @@ export default function Animal() {
             <h3>{animalDetails.breed}</h3>
             <p><strong>Location:</strong> {animalDetails.place}</p>
             <p className="description"><strong>Description:</strong> {animalDetails.description}</p>
-            <p className="price">Price: {animalDetails.price}</p>
+            <p className="price">Price: ₹{animalDetails.price}</p>
             <div className="button-container">
-              <button className="adopt-button" onClick={handleAdoptClick}>Adopt</button>
+              <NavLink  to={`/adoptly/${category}/${id}/Payment`} 
+                            state={{ price: animalDetails.price }}>
+                              <button className="adopt-button" onClick={handleAdoptClick}>Adopt</button></NavLink>
               <button className="see-more-button" onClick={handleSeeMoreClick}>See More</button>
             </div>
           </div>

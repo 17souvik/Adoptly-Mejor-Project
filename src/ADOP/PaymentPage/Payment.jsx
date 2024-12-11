@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import AllData from "../Data/Data";
 import "./Payment.css";
 
 
 
 export default function Payment(){
+
+  const { category, id } = useParams();
+  const [animalDetails, setAnimalDetails] = useState(null);
+  
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const Data = AllData();
+    const animal = Data.find(animal => animal.id === parseInt(id) && animal.category.toLowerCase() === category.toLowerCase());
+    setAnimalDetails(animal);
+  }, [category, id]);
   const [formData, setFormData] = React.useState({
     cardNumber: '',
     cardName: '',
@@ -61,8 +74,19 @@ export default function Payment(){
       alert('Payment processed successfully!');
     }
   };
-
+  // console.log(animalDetails)
+  const shipping = 4.99; // Shipping cost
+  const tax = 10.0; // Fixed tax
+  
+  const totalAmount = animalDetails?.price
+    ? parseFloat(animalDetails.price.replace(/,/g, "")) + shipping + tax
+    : 0;
+  
+  console.log(totalAmount); // This will now give the correct total amount
+  
   return (
+
+  <div className="body">{animalDetails ?(
     <div className="payment-container">
       <div className="payment-header">
         <h1>Secure Payment</h1>
@@ -73,19 +97,19 @@ export default function Payment(){
         <h2>Order Summary</h2>
         <div className="summary-item">
           <span>Product Total</span>
-          <span>$99.99</span>
+          <span>₹{animalDetails.price}</span>
         </div>
         <div className="summary-item">
           <span>Shipping</span>
-          <span>$4.99</span>
+          <span>₹{shipping.toFixed(2)}</span>
         </div>
         <div className="summary-item">
           <span>Tax</span>
-          <span>$10.00</span>
+          <span>₹{tax.toFixed(2)}</span>
         </div>
         <div className="summary-item total">
           <span>Total Amount</span>
-          <span>$114.98</span>
+          <span>₹{totalAmount.toFixed(2)}</span>
         </div>
       </div>
 
@@ -197,10 +221,15 @@ export default function Payment(){
           {errors.address && <span className="error">{errors.address}</span>}
         </div>
 
-        <button type="submit" className="submit-btn">
-          Pay $114.98 Securely
-        </button>
+        <button type="submit" className="submit-btn" >
+  Pay ₹{totalAmount.toFixed(2)} Securely
+</button>
       </form>
     </div>
+    ) : (
+      <p>Animal not found!</p>
+    )}
+
+  </div>
   );
 };
